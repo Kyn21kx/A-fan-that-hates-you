@@ -1,9 +1,0 @@
-D:\Programming\C#\AFTHY\bin\Debug\AFTHY.exe.config
-D:\Programming\C#\AFTHY\bin\Debug\AFTHY.exe
-D:\Programming\C#\AFTHY\bin\Debug\AFTHY.pdb
-D:\Programming\C#\AFTHY\obj\Debug\AFTHY.csprojAssemblyReference.cache
-D:\Programming\C#\AFTHY\obj\Debug\AFTHY.Properties.Resources.resources
-D:\Programming\C#\AFTHY\obj\Debug\AFTHY.csproj.GenerateResource.cache
-D:\Programming\C#\AFTHY\obj\Debug\AFTHY.csproj.CoreCompileInputs.cache
-D:\Programming\C#\AFTHY\obj\Debug\AFTHY.exe
-D:\Programming\C#\AFTHY\obj\Debug\AFTHY.pdb
