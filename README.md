@@ -1,0 +1,3 @@
+# A Fan that hates you...
+## Description
+This program is aimed as a parody of Michael Reeves' projects, the software will provide a proper interface between a microcontroller, and a face recognition module to activate a rotating mechanism on the base of a fan to essentially render it useless, because it hates you.
