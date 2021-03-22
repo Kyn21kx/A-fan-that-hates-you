@@ -8,5 +8,6 @@ namespace AFTHY {
 		public Form1() {
 			InitializeComponent();
 		}
+
 	}
 }
