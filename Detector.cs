@@ -15,10 +15,10 @@ namespace AFTHY {
 		/// </summary>
 		private const string TRAINING_FILE = "haarcascade_frontalface_default.xml";
 
-        /// <summary>
-        /// Threshold for face detection
-        /// </summary>
-        private double scalarFactor;
+		/// <summary>
+		/// Threshold for face detection
+		/// </summary>
+		private double scalarFactor;
 		/// <summary>
 		/// The minimum size of the area to be detected in pixels
 		/// </summary>
@@ -28,13 +28,17 @@ namespace AFTHY {
 			this.Classifier = new CascadeClassifier(TRAINING_FILE);
 			this.scalarFactor = scalarFactor;
 			this.minDectecionSize = new Size(70, 70);
-        }
+		}
 
 		public Detector(double scalarFactor, (int w, int h) detectionSize) {
 			this.Classifier = new CascadeClassifier(TRAINING_FILE);
 			this.scalarFactor = scalarFactor;
 			Size dSize = new Size(detectionSize.w, detectionSize.h);
 			this.minDectecionSize = dSize;
+		}
+
+		~Detector() {
+			this.Classifier?.Dispose();
 		}
 
 		/// <summary>
@@ -44,13 +48,18 @@ namespace AFTHY {
 		/// <returns>An array of rectangles that represent the area on which a face was detected</returns>
 		public Rectangle[] GetFaces(Bitmap source) {
 			if (source is null) return null; //Shit went south
-			//Process the image as grayscale and generate a new EMGU.CV.Image object
-			Image<Gray, byte> grayImg = new Image<Gray, byte>(source);
-			//Return the result of the matching
-			//The 3 here is the minimum neighbour count, this eliminates 
-			//duplicate detections (for more info, check function summary)
-			return Classifier.DetectMultiScale(grayImg, scalarFactor, 3, minDectecionSize);
-        }
+			try {
+				//Process the image as grayscale and generate a new EMGU.CV.Image object
+				Image<Gray, byte> grayImg = new Image<Gray, byte>(source);
+				//Return the result of the matching
+				//The 3 here is the minimum neighbour count, this eliminates 
+				//duplicate detections (for more info, check function summary)
+				return Classifier.DetectMultiScale(grayImg, scalarFactor, 3, minDectecionSize);
+			}
+			catch (Exception) {
+				return new Rectangle[0];
+			}
+		}
 
 	}
 }

@@ -38,3 +38,8 @@ D:\Programming\C#\AFTHY\bin\Debug\tr\ZedGraph.resources.dll
 D:\Programming\C#\AFTHY\bin\Debug\zh-cn\ZedGraph.resources.dll
 D:\Programming\C#\AFTHY\bin\Debug\zh-tw\ZedGraph.resources.dll
 D:\Programming\C#\AFTHY\bin\Debug\haarcascade_frontalface_default.xml
+D:\Programming\C#\AFTHY\bin\Debug\AForge.dll
+D:\Programming\C#\AFTHY\bin\Debug\AForge.Video.DirectShow.dll
+D:\Programming\C#\AFTHY\bin\Debug\AForge.Video.dll
+D:\Programming\C#\AFTHY\bin\Debug\AForge.xml
+D:\Programming\C#\AFTHY\bin\Debug\AForge.Video.xml

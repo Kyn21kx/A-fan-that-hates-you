@@ -25,7 +25,8 @@ namespace AFTHY {
         /// </summary>
         private void InitializeComponent() {
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
-            this.testBtn = new System.Windows.Forms.Button();
+            this.videoDevices = new System.Windows.Forms.ComboBox();
+            this.label1 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -38,34 +39,48 @@ namespace AFTHY {
             this.pictureBox1.TabStop = false;
             this.pictureBox1.Click += new System.EventHandler(this.pictureBox1_Click);
             // 
-            // testBtn
+            // videoDevices
             // 
-            this.testBtn.Location = new System.Drawing.Point(386, 260);
-            this.testBtn.Name = "testBtn";
-            this.testBtn.Size = new System.Drawing.Size(75, 23);
-            this.testBtn.TabIndex = 1;
-            this.testBtn.Text = "Test";
-            this.testBtn.UseVisualStyleBackColor = true;
-            this.testBtn.Click += new System.EventHandler(this.testBtn_Click);
+            this.videoDevices.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.videoDevices.FormattingEnabled = true;
+            this.videoDevices.Location = new System.Drawing.Point(141, 289);
+            this.videoDevices.Name = "videoDevices";
+            this.videoDevices.Size = new System.Drawing.Size(202, 28);
+            this.videoDevices.TabIndex = 2;
+            this.videoDevices.SelectedIndexChanged += new System.EventHandler(this.videoDevices_SelectedIndexChanged);
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.Location = new System.Drawing.Point(12, 297);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(102, 20);
+            this.label1.TabIndex = 3;
+            this.label1.Text = "Video source";
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
-            this.Controls.Add(this.testBtn);
+            this.Controls.Add(this.label1);
+            this.Controls.Add(this.videoDevices);
             this.Controls.Add(this.pictureBox1);
             this.Name = "Form1";
             this.Text = "Idiot Cam";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Form1_FormClosing);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
         #endregion
 
         private System.Windows.Forms.PictureBox pictureBox1;
-        private System.Windows.Forms.Button testBtn;
+        private System.Windows.Forms.ComboBox videoDevices;
+        private System.Windows.Forms.Label label1;
     }
 }
 
