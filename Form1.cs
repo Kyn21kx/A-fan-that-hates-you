@@ -21,6 +21,7 @@ namespace AFTHY {
 		}
 
 		private void StartCamera() {
+			camManager?.CloseCam();
 			camManager = new CamManager(deviceList[videoDevices.SelectedIndex], OnFrame);
 			camManager.OpenCam();
 		}
@@ -35,7 +36,7 @@ namespace AFTHY {
 			//Draw the rectangle in red in our bitmap image
 			foreach (Rectangle rectangle in rectangles) {
 				using (Graphics graphics = Graphics.FromImage(bmp)) {
-					using (Pen pen = new Pen(Color.Blue, 1)) {
+					using (Pen pen = new Pen(Color.Blue, 2)) {
 						graphics.DrawRectangle(pen, rectangle);
 					}
 				}

@@ -10,13 +10,12 @@ using System.Drawing;
 
 namespace AFTHY {
 	class CamManager {
-	
-		private VideoCaptureDevice device;
 
 		public Bitmap CurrentFrame { get; private set; }
 
 		public delegate void AdditionalActions();
 
+		private VideoCaptureDevice device;
 		private AdditionalActions onFrameActions;
 
 		public CamManager(FilterInfo deviceInfo, AdditionalActions onFrameActions) {
