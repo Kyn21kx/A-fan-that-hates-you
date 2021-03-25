@@ -44,11 +44,12 @@ void reset_decay()
 
 float get_decay()
 {
-	if (decay_count < 100)
+	if (decay_count < 99)
 		++decay_count;
 
 	return *(decay_lut + decay_count);
 }
+
 char string[50];
 char buffer[50];
 
