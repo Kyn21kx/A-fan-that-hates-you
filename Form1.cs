@@ -59,7 +59,8 @@ namespace AFTHY
                     using (Pen pen = new Pen(Color.Blue, 2))
                     {
                         graphics.DrawRectangle(pen, rectangle);
-                        robotHandler?.setData((short)(((double)rectangle.X / bmp.Width - .5f) * 600));
+                        double speed = 0.5f - Math.Abs((double)rectangle.X / bmp.Width - .5f));//TODO: Properly calculate the speed needed. My brain doesn't work anymore and I need to go to sleep
+                        robotHandler?.setData((short)(speed * 600));
                     }
                 }
             }

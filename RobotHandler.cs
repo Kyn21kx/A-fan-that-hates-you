@@ -16,6 +16,7 @@ namespace AFTHY
         public RobotHandler(string port)
         {
             sp = new SerialPort(port);
+            sp.BaudRate = 115200;
             msg = new byte[]{
                  WRITE_START,
                  0,
