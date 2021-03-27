@@ -7,60 +7,66 @@ using System.IO.Ports;
 
 namespace AFTHY
 {
-    class RobotHandler
-    {
-        static readonly byte WRITE_START = (byte)0x11;
-        static readonly byte WRITE_STOP = (byte)0x7f;
+	class RobotHandler
+	{
+		public bool Moving { get; private set; }
 
-        readonly SerialPort sp;
-        public RobotHandler(string port)
-        {
-            sp = new SerialPort(port);
-            sp.BaudRate = 115200;
-            msg = new byte[]{
-                 WRITE_START,
-                 0,
-                 0,
-                 WRITE_STOP
-            };
+		static readonly byte WRITE_START = (byte)0x11;
+		static readonly byte WRITE_STOP = (byte)0x7f;
 
-            sp.Open();
-        }
+		readonly SerialPort sp;
+		public RobotHandler(string port) {
+			sp = new SerialPort(port);
+			sp.BaudRate = 115200;
+			msg = new byte[]{
+				 WRITE_START,
+				 0,
+				 0,
+				 WRITE_STOP
+			};
 
-        public void Dispose()
-        {
-            if (sp.IsOpen)
-                sp.Close();
+			sp.Open();
+		}
 
-            sp.Dispose();
-        }
+		public void Dispose()
+		{
+			if (sp.IsOpen)
+				sp.Close();
 
-        private byte[] msg;
-        public void setData(short speed)
-        {
-            Console.WriteLine(speed);
-            msg[1] = (byte)(speed >> 8);
-            msg[2] = (byte)(speed);
+			sp.Dispose();
+		}
 
-            sp.Write(msg, 0, 4);
-            Thread.Sleep(15);
+		private byte[] msg;
+		public void setData(short speed) {
+			if (Moving) return;
+			//Console.WriteLine(speed);
+			msg[1] = (byte)(speed >> 8);
+			msg[2] = (byte)(speed);
 
-            while (sp.BytesToRead > 0)
-                Console.WriteLine(sp.ReadExisting());
-        }
+			sp.Write(msg, 0, 4);
+			Thread.Sleep(15);
+
+			while (sp.BytesToRead > 0) {
+				string postBack = sp.ReadExisting();
+				Moving = postBack == "0";
+				Console.WriteLine(postBack);
+				
+            }
+		}
 
 
-        ~RobotHandler()
-        {
-            if (sp.IsOpen)
-                sp.Close();
+		~RobotHandler() {
+			if (sp.IsOpen) {
+				this.setData(0);
+				sp.Close();
+			}
 
-            sp.Dispose();
-        }
+			sp.Dispose();
+		}
 
-        public static String[] getAllAvailablePorts()
-        {
-            return SerialPort.GetPortNames();
-        }
-    }
+		public static string[] getAllAvailablePorts()
+		{
+			return SerialPort.GetPortNames();
+		}
+	}
 }

@@ -20,8 +20,7 @@ void reset_decay()
 	decay_count = 0;
 }
 
-float get_decay()
-{
+float get_decay() {
 	if (decay_count < 99)
 		++decay_count;
 

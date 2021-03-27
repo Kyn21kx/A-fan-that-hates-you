@@ -1,16 +1,18 @@
 #include <Arduino.h>
-
 #include "definitions.h"
 #include "decay.h"
 
+Servo motor;
+uint8_t state = 0;
+uint16_t speed;
+
 void setup()
 {
-	pinMode(CONTROL_PIN, OUTPUT);
+	//pinMode(CONTROL_PIN, OUTPUT);
 	Serial.begin(SERIAL_BAUD);
 	Serial.println("INITIATING SERVO CONTROL");
-
-	set_interrupts();
-
+	motor.attach(CONTROL_PIN);
+	motor.writeMicroseconds(1500);
 	speed = 0;
 }
 
@@ -27,8 +29,12 @@ void loop()
 
 				if (Serial.read() == STOP_BYTE)
 				{
-					sprintf(str, "Setting speed to %d\0", value);
-					Serial.print(str);
+					//sprintf(str, "Setting speed to %d\0", value);
+					speed = value;
+					Serial.println(speed);
+					motor.writeMicroseconds(1500 + speed);
+					delay(200);
+					//delayMicroseconds(100);
 				} else {
 					while (Serial.available() > 0)
 						Serial.read();
@@ -37,6 +43,10 @@ void loop()
 				while(Serial.available() > 0)
 					Serial.read();
 			}
+	else {
+		motor.writeMicroseconds(1500);
+		delay(200);
+	}
 
 	delay(10);
 }

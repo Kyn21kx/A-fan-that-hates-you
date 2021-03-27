@@ -13,10 +13,11 @@ namespace AFTHY
     {
 
         private CamManager camManager;
+        private Detector detector;
         private FilterInfoCollection deviceList;
 
         private RobotHandler robotHandler;
-        private String[] availableComPorts;
+        private string[] availableComPorts;
         public Form1()
         {
             InitializeComponent();
@@ -29,7 +30,7 @@ namespace AFTHY
 
             deviceList = CamManager.GetCameras();
             videoDevices.DropDownStyle = ComboBoxStyle.DropDownList;
-
+            detector = new Detector(1.7);
             foreach (FilterInfo device in deviceList)
             {
                 videoDevices.Items.Add(device.Name);
@@ -46,12 +47,12 @@ namespace AFTHY
         private void OnFrame()
         {
             Bitmap bmp = camManager.CurrentFrame;
-            pictureBox1.Image = bmp;
+            //pictureBox1.Image = bmp;
             //Create a new detector object with a threshold of 2 (view class definition for more info)
-            Detector detector = new Detector(1.7);
             //Get the areas on which a face has been detected
             Rectangle[] rectangles = detector.GetFaces(bmp);
             //Draw the rectangle in red in our bitmap image
+            double speed = 0d;
             foreach (Rectangle rectangle in rectangles)
             {
                 using (Graphics graphics = Graphics.FromImage(bmp))
@@ -59,11 +60,12 @@ namespace AFTHY
                     using (Pen pen = new Pen(Color.Blue, 2))
                     {
                         graphics.DrawRectangle(pen, rectangle);
-                        double speed = 0.5f - Math.Abs((double)rectangle.X / bmp.Width - .5f));//TODO: Properly calculate the speed needed. My brain doesn't work anymore and I need to go to sleep
-                        robotHandler?.setData((short)(speed * 600));
+                        speed = 0.5d - Math.Abs((double)rectangle.X / bmp.Width - .5d);//TODO: Properly calculate the speed needed. My brain doesn't work anymore and I need to go to sleep
                     }
                 }
+                break;
             }
+            robotHandler?.setData((short)(speed * 600));
             //Set the picture box's image to the drawn-on bitmap
             pictureBox1.Image = bmp;
         }
